@@ -17,5 +17,5 @@ public:
 	bool consoleshown = false;
 	bool antivirus = false;
 	int antivirusmode = 0;
+	bool disablespotlight = false;
 };
-

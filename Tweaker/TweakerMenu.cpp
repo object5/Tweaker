@@ -13,6 +13,7 @@ config cfg;
 void TweakerMenu::ApplyCallback() {
 	PowershellTweaks::DeletePackages(apps);
 	RegistryTweaks::DisableWindowsDefender(cfg);
+	RegistryTweaks::DisableSpotlight(cfg);
 }
 
 void TweakerMenu::Fill()
@@ -36,14 +37,16 @@ void TweakerMenu::Fill()
 	ImGui::Separator();
 	ImGui::Checkbox("Disable windows defender", &cfg.antivirus);
     if (ImGui::BeginCombo("Antivirus mode", cfg.antivirusmode == 0 ? "Normal mode" : "Aggressive mode")) {
-    if (ImGui::Selectable("Normal mode", cfg.antivirusmode == 0)) {
-    cfg.antivirusmode = 0;
-    }
-    if (ImGui::Selectable("Aggressive mode", cfg.antivirusmode == 1)) {
-    cfg.antivirusmode = 1;
-    }
+		if (ImGui::Selectable("Normal mode", cfg.antivirusmode == 0)) {
+			cfg.antivirusmode = 0;
+		}
+		if (ImGui::Selectable("Aggressive mode", cfg.antivirusmode == 1)) {
+			cfg.antivirusmode = 1;
+		}
     ImGui::EndCombo();
     }
+	ImGui::Separator();
+	ImGui::Checkbox("Disable Windows Spotlight", &cfg.disablespotlight);
 	if (ImGui::Button("Apply"))
 		TweakerMenu::ApplyCallback();
 	if (ImGui::Button("Toggle console"))

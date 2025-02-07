@@ -36,16 +36,21 @@ bool ExecutePowerShellCommand(const std::string& command) {
 
 int PowershellTweaks::DeletePackages(config::apps apps) {
     std::vector<std::pair<bool, std::string>> packages = {
-                {apps.paint, "Microsoft.Paint"},
-                {apps.music, "Microsoft.ZuneMusic"},
-                {apps.phone, "Microsoft.WindowsPhone"},
-                {apps.maps, "Microsoft.BingMaps"},
-                {apps.camera, "Microsoft.WindowsCamera"},
-                {apps.people, "Microsoft.People"},
-                {apps.clipchamp, "Microsoft.Clipchamp"},
-                {apps.xbox, "Microsoft.XboxApp"},
-                {apps.todo, "Microsoft.Todo"},
-                {apps.alarms, "Microsoft.AlarmClock"}
+        {apps.paint, "Microsoft.Paint"},
+        {apps.music, "Microsoft.ZuneMusic"},
+        {apps.phone, "Microsoft.YourPhone"},
+        {apps.maps, "Microsoft.WindowsMaps"},
+        {apps.camera, "Microsoft.WindowsCamera"},
+        {apps.people, "Microsoft.People"},
+        {apps.clipchamp, "Microsoft.Clipchamp"},
+        {apps.xbox, "Microsoft.Xbox.TCUI"},
+        {apps.xbox, "Microsoft.XboxGameOverlay"},
+        {apps.xbox, "Microsoft.XboxSpeechToTextOverlay"},
+        {apps.xbox, "Microsoft.XboxGamingOverlay"},
+        {apps.xbox, "Microsoft.XboxGameCallableUI"},
+        {apps.xbox, "Microsoft.XboxIdentityProvider"},
+        {apps.todo, "Microsoft.Todos"},
+        {apps.alarms, "Microsoft.WindowsAlarms"}
     };
 
     for (const auto& package : packages) {
