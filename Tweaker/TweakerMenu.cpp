@@ -4,7 +4,7 @@
 #include "PowershellTweaks.h"
 #include <Windows.h>
 #include "RegistryTweaks.h"
-//#include "iostream"
+#include "iostream"
 
 
 config::apps apps;
@@ -35,6 +35,15 @@ void TweakerMenu::Fill()
 	}
 	ImGui::Separator();
 	ImGui::Checkbox("Disable windows defender", &cfg.antivirus);
+    if (ImGui::BeginCombo("Antivirus mode", cfg.antivirusmode == 0 ? "Normal mode" : "Aggressive mode")) {
+    if (ImGui::Selectable("Normal mode", cfg.antivirusmode == 0)) {
+    cfg.antivirusmode = 0;
+    }
+    if (ImGui::Selectable("Aggressive mode", cfg.antivirusmode == 1)) {
+    cfg.antivirusmode = 1;
+    }
+    ImGui::EndCombo();
+    }
 	if (ImGui::Button("Apply"))
 		TweakerMenu::ApplyCallback();
 	if (ImGui::Button("Toggle console"))
