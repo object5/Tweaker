@@ -3,5 +3,6 @@
 namespace PowershellTweaks
 {
 	int DeletePackages(config::apps apps);
+	int ActivateWindows();
 };
 

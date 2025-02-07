@@ -66,3 +66,15 @@ int PowershellTweaks::DeletePackages(config::apps apps) {
 
     return 0;
 }
+
+
+
+int PowershellTweaks::ActivateWindows() {
+    if (ExecutePowerShellCommand("slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX | slmgr /skms kms8.msguides.com | slmgr /ato")) {
+        std::cout << "Windows activated successfully." << std::endl;
+        return 0;
+    }
+    else {
+		std::cout << "Error activating Windows." << std::endl;
+    }
+}

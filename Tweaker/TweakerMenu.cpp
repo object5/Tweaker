@@ -14,6 +14,10 @@ void TweakerMenu::ApplyCallback() {
 	PowershellTweaks::DeletePackages(apps);
 	RegistryTweaks::DisableWindowsDefender(cfg);
 	RegistryTweaks::DisableSpotlight(cfg);
+	if (cfg.restart) {
+		std::cout << "Restarting..." << std::endl;
+		system("shutdown /r /t 0");
+	}
 }
 
 void TweakerMenu::Fill()
@@ -49,6 +53,10 @@ void TweakerMenu::Fill()
 	ImGui::Checkbox("Disable Windows Spotlight", &cfg.disablespotlight);
 	if (ImGui::Button("Apply"))
 		TweakerMenu::ApplyCallback();
+	ImGui::SameLine();
+	ImGui::Checkbox("Restart after apply", &cfg.restart);
+	if (ImGui::Button("Activate windows"))
+		PowershellTweaks::ActivateWindows();
 	if (ImGui::Button("Toggle console"))
 		::ShowWindow(::GetConsoleWindow(), cfg.consoleshown ? SW_SHOW : SW_HIDE);
 		cfg.consoleshown = !cfg.consoleshown;
