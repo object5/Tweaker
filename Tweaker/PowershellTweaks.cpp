@@ -47,7 +47,7 @@ int PowershellTweaks::DeletePackages(config::apps apps) {
         {apps.xbox, "Microsoft.XboxGameOverlay"},
         {apps.xbox, "Microsoft.XboxSpeechToTextOverlay"},
         {apps.xbox, "Microsoft.XboxGamingOverlay"},
-        {apps.xbox, "Microsoft.XboxGameCallableUI"},
+        // {apps.xbox, "Microsoft.XboxGameCallableUI"}, 
         {apps.xbox, "Microsoft.XboxIdentityProvider"},
         {apps.todo, "Microsoft.Todos"},
         {apps.alarms, "Microsoft.WindowsAlarms"}
