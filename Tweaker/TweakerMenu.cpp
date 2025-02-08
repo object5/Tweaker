@@ -14,6 +14,7 @@ void TweakerMenu::ApplyCallback() {
 	PowershellTweaks::DeletePackages(apps);
 	RegistryTweaks::DisableWindowsDefender(cfg);
 	RegistryTweaks::DisableSpotlight(cfg);
+	RegistryTweaks::DisableTelemetry(cfg);
 	if (cfg.restart) {
 		std::cout << "Restarting..." << std::endl;
 		system("shutdown /r /t 0");
@@ -22,7 +23,7 @@ void TweakerMenu::ApplyCallback() {
 
 void TweakerMenu::Fill()
 {
-	ImGui::Begin("Tweaker");
+	ImGui::Begin("Tweaker", nullptr, ImGuiWindowFlags_NoSavedSettings);
 	ImGui::Text(ImGui::GetVersion());
 	if (ImGui::CollapsingHeader("Microsoft apps"))
 	{
@@ -51,14 +52,16 @@ void TweakerMenu::Fill()
     }
 	ImGui::Separator();
 	ImGui::Checkbox("Disable Windows Spotlight", &cfg.disablespotlight);
+	ImGui::Checkbox("Disable Telemetry", &cfg.disabletelemetry);
 	if (ImGui::Button("Apply"))
 		TweakerMenu::ApplyCallback();
 	ImGui::SameLine();
 	ImGui::Checkbox("Restart after apply", &cfg.restart);
 	if (ImGui::Button("Activate windows"))
 		PowershellTweaks::ActivateWindows();
-	if (ImGui::Button("Toggle console"))
-		::ShowWindow(::GetConsoleWindow(), cfg.consoleshown ? SW_SHOW : SW_HIDE);
+	if (ImGui::Button("Toggle console")) {
 		cfg.consoleshown = !cfg.consoleshown;
+		::ShowWindow(::GetConsoleWindow(), cfg.consoleshown ? SW_SHOW : SW_HIDE);
+	}
 	ImGui::End();
 }

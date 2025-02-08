@@ -63,9 +63,32 @@ int RegistryTweaks::DisableWindowsDefender(config cfg) {
 
 int RegistryTweaks::DisableSpotlight(config cfg) {
     if (!cfg.disablespotlight) {
-        return 0;
+        return 1;
     }
     Addkey(HKEY_CURRENT_USER, "SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent", "DisableWindowsSpotlightFeatures", DWORD(1));
 
     return 0;
+}
+
+int RegistryTweaks::DisableTelemetry(config cfg) {
+    if (!cfg.disabletelemetry) {
+        return 1;
+    }
+    Addkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection", "AllowTelemetry", DWORD(0));
+    Addkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection", "AllowDesktopAnalytics", DWORD(0));
+	Addkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection", "DisableDeviceNameUsage", DWORD(1));
+
+    Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo", "Enabled", DWORD(0));
+    Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Privacy", "TailoredExperiencesWithDiagnosticDataEnabled", DWORD(0));
+    Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\Speech_OneCore\\Settings\\OnlineSpeechPrivacy", "HasAccepted", DWORD(0));
+    Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\Input\\TIPC", "Enabled", DWORD(0));
+    Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\InputPersonalization", "RestrictImplicitInkCollection", DWORD(1));
+    Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\InputPersonalization", "RestrictImplicitTextCollection", DWORD(1));
+    Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\InputPersonalization\\TrainedDataStore", "HarvestContacts", DWORD(0));
+    Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\Personalization\\Settings", "AcceptedPrivacyPolicy", DWORD(0));
+    Addkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection", "AllowTelemetry", DWORD(0));
+    Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "Start_TrackProgs", DWORD(0));
+    Addkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\Policies\\Microsoft\\Windows\\System", "PublishUserActivities", DWORD(0));
+    Addkey(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Siuf\\Rules", "NumberOfSIUFInPeriod", DWORD(0));
+    Addkey(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Siuf\\Rules", "PeriodInNanoSeconds", DWORD(-1));
 }

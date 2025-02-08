@@ -18,5 +18,6 @@ public:
 	bool antivirus = false;
 	int antivirusmode = 0;
 	bool disablespotlight = false;
+	bool disabletelemetry = false;
 	bool restart = false;
 };
