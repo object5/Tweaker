@@ -11,10 +11,9 @@ bool ExecutePowerShellCommand(const std::string& command) {
     PROCESS_INFORMATION pi;
     ZeroMemory(&si, sizeof(si));
     ZeroMemory(&pi, sizeof(pi));
+    si.cb = sizeof(si);
 
-
-    if (!CreateProcessA( NULL, const_cast<char*>(fullCommand.c_str()), NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) 
-    {
+    if (!CreateProcessA(NULL, const_cast<char*>(fullCommand.c_str()), NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
         std::cerr << "CreateProcess failed (" << GetLastError() << ").\n";
         return false;
     }
@@ -32,6 +31,17 @@ bool ExecutePowerShellCommand(const std::string& command) {
     CloseHandle(pi.hThread);
 
     return exitCode == 0;
+}
+
+std::string CreateRemovePackageCommand(const std::vector<std::string>& packages) {
+    std::string command;
+    for (const auto& package : packages) {
+        if (!command.empty()) {
+            command += "; ";
+        }
+        command += "Get-AppxPackage '" + package + "' | Remove-AppxPackage";
+    }
+    return command;
 }
 
 int PowershellTweaks::DeletePackages(config::apps apps) {
@@ -53,14 +63,21 @@ int PowershellTweaks::DeletePackages(config::apps apps) {
         {apps.alarms, "Microsoft.WindowsAlarms"}
     };
 
+    std::vector<std::string> packagesToRemove;
     for (const auto& package : packages) {
         if (package.first) {
-            if (ExecutePowerShellCommand("Get-AppxPackage '" + package.second + "' | Remove-AppxPackage")) {
-                std::cout << "Package " << package.second << " deleted." << std::endl;
+            packagesToRemove.push_back(package.second);
+        }
+    }
+    if (!packagesToRemove.empty()) {
+        std::string command = CreateRemovePackageCommand(packagesToRemove);
+        if (ExecutePowerShellCommand(command)) {
+            for (const auto& package : packagesToRemove) {
+                std::cout << "Package " << package << " deleted." << std::endl;
             }
-            else {
-                std::cerr << "Error deleting package " << package.second << std::endl;
-            }
+        }
+        else {
+            std::cerr << "Error deleting packages." << std::endl;
         }
     }
 
