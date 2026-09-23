@@ -4,6 +4,7 @@
 namespace RegistryTweaks
 {
 	int Addkey(HKEY rootKey, LPCSTR subkey, const char* valuename, DWORD valuedata);
+	int AddString(HKEY rootKey, LPCSTR subkey, const char* valuename, const char* valuedata);
 	int DisableWindowsDefender(config cfg);
 	int DisableSpotlight(config cfg);
 	int DisableTelemetry(config cfg);
@@ -19,4 +20,6 @@ namespace RegistryTweaks
 	int DisablePowerThrottle(config cfg);
 	int DisableNetworkThrottle(config cfg);
 	int DisableGameBar(config cfg);
+	int DisableMouseAccel(config cfg);
+	int OptimizeStartup(config cfg);
 };

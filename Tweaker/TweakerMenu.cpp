@@ -28,6 +28,9 @@ void TweakerMenu::ApplyCallback() {
 	RegistryTweaks::DisablePowerThrottle(cfg);
 	RegistryTweaks::DisableNetworkThrottle(cfg);
 	RegistryTweaks::DisableGameBar(cfg);
+	RegistryTweaks::DisableMouseAccel(cfg);
+	RegistryTweaks::OptimizeStartup(cfg);
+	PowershellTweaks::DisableDynamicTick(cfg);
 	if (cfg.restart) {
 		std::cout << "Restarting..." << std::endl;
 		system("shutdown /r /t 0");
@@ -93,6 +96,9 @@ void TweakerMenu::Fill()
 	ImGui::Checkbox("Disable Power Throttling", &cfg.disablepowerthrottle);
 	ImGui::Checkbox("Disable Network Throttle", &cfg.disablenetworkthrottle);
 	ImGui::Checkbox("Disable GameBar", &cfg.disablegamebar);
+	ImGui::Checkbox("Disable Mouse Accel", &cfg.disablemouseaccel);
+	ImGui::Checkbox("Fast Startup", &cfg.optimizestartup);
+	ImGui::Checkbox("Disable Dynamic Tick", &cfg.disabledynamictick);
 	if (ImGui::Button("Apply"))
 		TweakerMenu::ApplyCallback();
 	ImGui::SameLine();

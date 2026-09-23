@@ -124,3 +124,17 @@ int PowershellTweaks::EnableUltimatePerf(config cfg) {
         return 1;
     }
 }
+
+int PowershellTweaks::DisableDynamicTick(config cfg) {
+    if (!cfg.disabledynamictick) {
+        return 1;
+    }
+    if (ExecutePowerShellCommand("bcdedit /set disabledynamictick yes")) {
+        std::cout << "Dynamic tick disabled." << std::endl;
+        return 0;
+    }
+    else {
+        std::cerr << "Error disabling dynamic tick." << std::endl;
+        return 1;
+    }
+}

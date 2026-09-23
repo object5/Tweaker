@@ -45,5 +45,8 @@ public:
 	bool disablepowerthrottle = false;
 	bool disablenetworkthrottle = false;
 	bool disablegamebar = false;
+	bool disablemouseaccel = false;
+	bool optimizestartup = false;
+	bool disabledynamictick = false;
 	bool restart = false;
 };

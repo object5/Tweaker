@@ -1,6 +1,7 @@
 ﻿#include "RegistryTweaks.h"
 #include <windows.h>
 #include <iostream>
+#include <cstring>
 #include "TweakerMenu.h"
 
 int RegistryTweaks::Addkey(HKEY rootKey, LPCSTR subkey, const char* valuename, DWORD valuedata) {
@@ -10,6 +11,27 @@ int RegistryTweaks::Addkey(HKEY rootKey, LPCSTR subkey, const char* valuename, D
 	if (result == ERROR_SUCCESS) {
 		std::cout << "Key :" << subkey << std::endl;
 		result = RegSetValueExA(hKey, valuename, 0, REG_DWORD, (const BYTE*)&valuedata, sizeof(valuedata));
+		if (result == ERROR_SUCCESS) {
+			std::cout << "Value written successfully!" << std::endl;
+		}
+		else {
+			std::cerr << "Error writing value: " << result << std::endl;
+		}
+		RegCloseKey(hKey);
+	}
+	else {
+		std::cerr << "Error creating key: " << result << std::endl;
+	}
+	return 0;
+}
+
+int RegistryTweaks::AddString(HKEY rootKey, LPCSTR subkey, const char* valuename, const char* valuedata) {
+	HKEY hKey;
+	LONG result;
+	result = RegCreateKeyExA(rootKey, subkey, 0, NULL, 0, KEY_ALL_ACCESS, NULL, &hKey, NULL);
+	if (result == ERROR_SUCCESS) {
+		std::cout << "Key :" << subkey << std::endl;
+		result = RegSetValueExA(hKey, valuename, 0, REG_SZ, (const BYTE*)valuedata, (DWORD)strlen(valuedata) + 1);
 		if (result == ERROR_SUCCESS) {
 			std::cout << "Value written successfully!" << std::endl;
 		}
@@ -217,5 +239,24 @@ int RegistryTweaks::DisableGameBar(config cfg) {
     Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\GameBar", "ShowStartupPanel", DWORD(0));
     Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\GameBar", "UseNexusForGameBarEnabled", DWORD(0));
     Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\GameBar", "GamePanelStartupTipIndex", DWORD(0));
+    return 0;
+}
+
+int RegistryTweaks::DisableMouseAccel(config cfg) {
+    if (!cfg.disablemouseaccel) {
+        return 1;
+    }
+    AddString(HKEY_CURRENT_USER, "Control Panel\\Mouse", "MouseSpeed", "0");
+    AddString(HKEY_CURRENT_USER, "Control Panel\\Mouse", "MouseThreshold1", "0");
+    AddString(HKEY_CURRENT_USER, "Control Panel\\Mouse", "MouseThreshold2", "0");
+    return 0;
+}
+
+int RegistryTweaks::OptimizeStartup(config cfg) {
+    if (!cfg.optimizestartup) {
+        return 1;
+    }
+    Addkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize", "StartupDelayInMSec", DWORD(0));
+    Addkey(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize", "StartupDelayInMSec", DWORD(0));
     return 0;
 }
