@@ -175,3 +175,47 @@ int RegistryTweaks::DisableDelivery(config cfg) {
     Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization", "SystemSettingsDownloadMode", DWORD(0));
     return 0;
 }
+
+int RegistryTweaks::EnableGameMode(config cfg) {
+    if (!cfg.gamemode) {
+        return 1;
+    }
+    Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\GameBar", "AllowAutoGameMode", DWORD(1));
+    Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\GameBar", "AutoGameModeEnabled", DWORD(1));
+    return 0;
+}
+
+int RegistryTweaks::EnableHags(config cfg) {
+    if (!cfg.hags) {
+        return 1;
+    }
+    Addkey(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers", "HwSchMode", DWORD(2));
+    return 0;
+}
+
+int RegistryTweaks::DisablePowerThrottle(config cfg) {
+    if (!cfg.disablepowerthrottle) {
+        return 1;
+    }
+    Addkey(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling", "PowerThrottlingOff", DWORD(1));
+    return 0;
+}
+
+int RegistryTweaks::DisableNetworkThrottle(config cfg) {
+    if (!cfg.disablenetworkthrottle) {
+        return 1;
+    }
+    Addkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile", "NetworkThrottlingIndex", DWORD(-1));
+    Addkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile", "SystemResponsiveness", DWORD(10));
+    return 0;
+}
+
+int RegistryTweaks::DisableGameBar(config cfg) {
+    if (!cfg.disablegamebar) {
+        return 1;
+    }
+    Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\GameBar", "ShowStartupPanel", DWORD(0));
+    Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\GameBar", "UseNexusForGameBarEnabled", DWORD(0));
+    Addkey(HKEY_CURRENT_USER, "Software\\Microsoft\\GameBar", "GamePanelStartupTipIndex", DWORD(0));
+    return 0;
+}

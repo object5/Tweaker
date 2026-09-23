@@ -14,4 +14,9 @@ namespace RegistryTweaks
 	int DisableGameDvr(config cfg);
 	int OptimizeExplorer(config cfg);
 	int DisableDelivery(config cfg);
+	int EnableGameMode(config cfg);
+	int EnableHags(config cfg);
+	int DisablePowerThrottle(config cfg);
+	int DisableNetworkThrottle(config cfg);
+	int DisableGameBar(config cfg);
 };

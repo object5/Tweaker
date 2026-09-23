@@ -22,6 +22,12 @@ void TweakerMenu::ApplyCallback() {
 	RegistryTweaks::DisableGameDvr(cfg);
 	RegistryTweaks::OptimizeExplorer(cfg);
 	RegistryTweaks::DisableDelivery(cfg);
+	RegistryTweaks::EnableGameMode(cfg);
+	RegistryTweaks::EnableHags(cfg);
+	PowershellTweaks::EnableUltimatePerf(cfg);
+	RegistryTweaks::DisablePowerThrottle(cfg);
+	RegistryTweaks::DisableNetworkThrottle(cfg);
+	RegistryTweaks::DisableGameBar(cfg);
 	if (cfg.restart) {
 		std::cout << "Restarting..." << std::endl;
 		system("shutdown /r /t 0");
@@ -80,6 +86,13 @@ void TweakerMenu::Fill()
 	ImGui::Checkbox("Disable GameDVR", &cfg.disablegamedvr);
 	ImGui::Checkbox("Optimize Explorer", &cfg.optimizeexplorer);
 	ImGui::Checkbox("Disable Delivery", &cfg.disabledelivery);
+	ImGui::Separator();
+	ImGui::Checkbox("Enable Game Mode", &cfg.gamemode);
+	ImGui::Checkbox("Enable HAGS", &cfg.hags);
+	ImGui::Checkbox("Ultimate Performance", &cfg.ultimateperf);
+	ImGui::Checkbox("Disable Power Throttling", &cfg.disablepowerthrottle);
+	ImGui::Checkbox("Disable Network Throttle", &cfg.disablenetworkthrottle);
+	ImGui::Checkbox("Disable GameBar", &cfg.disablegamebar);
 	if (ImGui::Button("Apply"))
 		TweakerMenu::ApplyCallback();
 	ImGui::SameLine();

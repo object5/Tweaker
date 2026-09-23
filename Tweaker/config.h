@@ -39,5 +39,11 @@ public:
 	bool disablegamedvr = false;
 	bool optimizeexplorer = false;
 	bool disabledelivery = false;
+	bool gamemode = false;
+	bool hags = false;
+	bool ultimateperf = false;
+	bool disablepowerthrottle = false;
+	bool disablenetworkthrottle = false;
+	bool disablegamebar = false;
 	bool restart = false;
 };

@@ -110,3 +110,17 @@ int PowershellTweaks::ActivateWindows() {
         return 1;
     }
 }
+
+int PowershellTweaks::EnableUltimatePerf(config cfg) {
+    if (!cfg.ultimateperf) {
+        return 1;
+    }
+    if (ExecutePowerShellCommand("powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61")) {
+        std::cout << "Ultimate Performance plan enabled." << std::endl;
+        return 0;
+    }
+    else {
+        std::cerr << "Error enabling Ultimate Performance plan." << std::endl;
+        return 1;
+    }
+}

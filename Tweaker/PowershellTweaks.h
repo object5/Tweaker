@@ -4,5 +4,6 @@ namespace PowershellTweaks
 {
 	int DeletePackages(config::apps apps);
 	int ActivateWindows();
+	int EnableUltimatePerf(config cfg);
 };
 
