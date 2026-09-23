@@ -7,4 +7,11 @@ namespace RegistryTweaks
 	int DisableWindowsDefender(config cfg);
 	int DisableSpotlight(config cfg);
 	int DisableTelemetry(config cfg);
+	int DisableCopilot(config cfg);
+	int DisableRecall(config cfg);
+	int DisableAds(config cfg);
+	int DisableWidgets(config cfg);
+	int DisableGameDvr(config cfg);
+	int OptimizeExplorer(config cfg);
+	int DisableDelivery(config cfg);
 };

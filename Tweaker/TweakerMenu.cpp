@@ -15,6 +15,13 @@ void TweakerMenu::ApplyCallback() {
 	RegistryTweaks::DisableWindowsDefender(cfg);
 	RegistryTweaks::DisableSpotlight(cfg);
 	RegistryTweaks::DisableTelemetry(cfg);
+	RegistryTweaks::DisableCopilot(cfg);
+	RegistryTweaks::DisableRecall(cfg);
+	RegistryTweaks::DisableAds(cfg);
+	RegistryTweaks::DisableWidgets(cfg);
+	RegistryTweaks::DisableGameDvr(cfg);
+	RegistryTweaks::OptimizeExplorer(cfg);
+	RegistryTweaks::DisableDelivery(cfg);
 	if (cfg.restart) {
 		std::cout << "Restarting..." << std::endl;
 		system("shutdown /r /t 0");
@@ -38,6 +45,19 @@ void TweakerMenu::Fill()
 		ImGui::Checkbox("Xbox", &apps.xbox);
 		ImGui::Checkbox("To do", &apps.todo);
 		ImGui::Checkbox("Alarms", &apps.alarms);
+		ImGui::Checkbox("Weather", &apps.weather);
+		ImGui::Checkbox("News", &apps.news);
+		ImGui::Checkbox("GetHelp", &apps.gethelp);
+		ImGui::Checkbox("GetStarted", &apps.getstarted);
+		ImGui::Checkbox("Feedback", &apps.feedback);
+		ImGui::Checkbox("Solitaire", &apps.solitaire);
+		ImGui::Checkbox("SoundRecorder", &apps.soundrecorder);
+		ImGui::Checkbox("Video", &apps.video);
+		ImGui::Checkbox("Teams", &apps.teams);
+		ImGui::Checkbox("Outlook", &apps.outlook);
+		ImGui::Checkbox("DevHome", &apps.devhome);
+		ImGui::Checkbox("Cortana", &apps.cortana);
+		ImGui::Checkbox("Copilot", &apps.copilot);
 	}
 	ImGui::Separator();
 	ImGui::Checkbox("Disable windows defender", &cfg.antivirus);
@@ -53,6 +73,13 @@ void TweakerMenu::Fill()
 	ImGui::Separator();
 	ImGui::Checkbox("Disable Windows Spotlight", &cfg.disablespotlight);
 	ImGui::Checkbox("Disable Telemetry", &cfg.disabletelemetry);
+	ImGui::Checkbox("Disable Copilot", &cfg.disablecopilot);
+	ImGui::Checkbox("Disable Recall", &cfg.disablerecall);
+	ImGui::Checkbox("Disable Ads", &cfg.disableads);
+	ImGui::Checkbox("Disable Widgets", &cfg.disablewidgets);
+	ImGui::Checkbox("Disable GameDVR", &cfg.disablegamedvr);
+	ImGui::Checkbox("Optimize Explorer", &cfg.optimizeexplorer);
+	ImGui::Checkbox("Disable Delivery", &cfg.disabledelivery);
 	if (ImGui::Button("Apply"))
 		TweakerMenu::ApplyCallback();
 	ImGui::SameLine();

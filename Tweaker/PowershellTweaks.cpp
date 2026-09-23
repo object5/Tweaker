@@ -57,10 +57,24 @@ int PowershellTweaks::DeletePackages(config::apps apps) {
         {apps.xbox, "Microsoft.XboxGameOverlay"},
         {apps.xbox, "Microsoft.XboxSpeechToTextOverlay"},
         {apps.xbox, "Microsoft.XboxGamingOverlay"},
-        // {apps.xbox, "Microsoft.XboxGameCallableUI"}, 
         {apps.xbox, "Microsoft.XboxIdentityProvider"},
         {apps.todo, "Microsoft.Todos"},
-        {apps.alarms, "Microsoft.WindowsAlarms"}
+        {apps.alarms, "Microsoft.WindowsAlarms"},
+        {apps.weather, "Microsoft.BingWeather"},
+        {apps.news, "Microsoft.BingNews"},
+        {apps.gethelp, "Microsoft.GetHelp"},
+        {apps.getstarted, "Microsoft.Getstarted"},
+        {apps.feedback, "Microsoft.WindowsFeedbackHub"},
+        {apps.solitaire, "Microsoft.MicrosoftSolitaireCollection"},
+        {apps.soundrecorder, "Microsoft.WindowsSoundRecorder"},
+        {apps.video, "Microsoft.ZuneVideo"},
+        {apps.teams, "MicrosoftTeams"},
+        {apps.teams, "Microsoft.Teams"},
+        {apps.outlook, "Microsoft.OutlookForWindows"},
+        {apps.devhome, "Microsoft.DevHome"},
+        {apps.cortana, "Microsoft.549981C3F5F10"},
+        {apps.cortana, "Microsoft.Cortana"},
+        {apps.copilot, "Microsoft.Copilot"}
     };
 
     std::vector<std::string> packagesToRemove;
@@ -93,5 +107,6 @@ int PowershellTweaks::ActivateWindows() {
     }
     else {
 		std::cout << "Error activating Windows." << std::endl;
+        return 1;
     }
 }
